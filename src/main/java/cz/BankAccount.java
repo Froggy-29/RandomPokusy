@@ -11,7 +11,9 @@ public class BankAccount {
     }
 
     public void setBalance(double balance) {
-        this.balance = balance;
+        if(noZeroValidation(balance)){
+            this.balance = balance;
+        }
     }
 
     public double getBalance() {
@@ -37,9 +39,12 @@ public class BankAccount {
 
     }
 
-    public void withdraw (double amount){
+    public boolean withdraw (double amount){
         if(getBalance() - amount < 0 && noZeroValidation(amount)){
             balance -= amount;
+            return true;
+        }else {
+            return false;
         }
     }
 
