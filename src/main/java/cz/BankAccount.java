@@ -2,6 +2,7 @@ package cz;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDateTime;
 
 public class BankAccount {
     private String ownerName;
@@ -48,7 +49,8 @@ public class BankAccount {
     public void deposit(double amount){
         if(noZeroValidation(amount)){
             balance += amount;
-            transactionHistory.add("Deposit + " + amount);
+            LocalDateTime now = LocalDateTime.now();
+            transactionHistory.add(now + " Deposit + " + amount);
         }
 
     }
@@ -56,7 +58,8 @@ public class BankAccount {
     public boolean withdraw (double amount){
         if(getBalance() - amount >= 0 && noZeroValidation(amount)){
             balance -= amount;
-            transactionHistory.add("Withdraw - " + amount);
+            LocalDateTime now = LocalDateTime.now();
+            transactionHistory.add(now + " Withdraw - " + amount);
             return true;
         }else {
             return false;
@@ -67,7 +70,8 @@ public class BankAccount {
         if(noZeroValidation(amount) && getBalance()-amount >= 0){
             this.balance -= amount;
             recipiement.deposit(amount);
-            transactionHistory.add("Transfer - " + amount + " to accaunt " + recipiement.getAccountNumber());
+            LocalDateTime now = LocalDateTime.now();
+            transactionHistory.add(now + " Transfer - " + amount + " to accaunt " + recipiement.getAccountNumber());
             return true;
         }else return false;
     }
