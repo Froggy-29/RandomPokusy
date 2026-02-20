@@ -26,19 +26,29 @@ public class BankAccount {
         return ovnerName;
     }
 
-    public double deposit(double amount){
-        return getBalance() + amount;
-    }
-
-    public double withdraw (double amount){
-        if(getBalance() - amount < 0){
-            return -1;
-        }else {
-            return getBalance() - amount;
+    public boolean noZeroValidation(double amount){
+        if(amount > 0) {
+            return false;
+        }else{
+            return true;
         }
     }
 
-    public String toString(double balance, String ovnerName){
-        return "owner: " + ovnerName + " balance: " + balance;
+    public void deposit(double amount){
+        if(noZeroValidation(amount)){
+           setBalance(getBalance() + amount);
+        }
+
+    }
+
+    public void withdraw (double amount){
+        if(getBalance() - amount < 0 && noZeroValidation(amount)){
+            setBalance(getBalance() - amount);
+        }
+    }
+
+    public String toString(){
+        System.out.println("Owner: " + getOvnerName() + " Balance: " + getBalance());
+        return null;
     }
 }
