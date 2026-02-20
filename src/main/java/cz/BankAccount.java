@@ -7,12 +7,15 @@ public class BankAccount {
 
     private double balance;
 
-    private static int accountNumber = 0;
+    private static int nextAccountNumber = 0;
+
+    private int accountNumber;
 
     public BankAccount(String ovnerName){
         this.ownerName = ovnerName;
         this.balance = 0;
-        this.accountNumber++;
+        nextAccountNumber++;
+        this.accountNumber = nextAccountNumber;
     }
 
     public void setBalance(double balance) {
