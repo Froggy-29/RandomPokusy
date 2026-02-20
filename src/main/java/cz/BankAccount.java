@@ -40,7 +40,7 @@ public class BankAccount {
     }
 
     public boolean withdraw (double amount){
-        if(getBalance() - amount < 0 && noZeroValidation(amount)){
+        if(getBalance() - amount >= 0 && noZeroValidation(amount)){
             balance -= amount;
             return true;
         }else {
