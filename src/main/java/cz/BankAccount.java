@@ -1,6 +1,7 @@
 package cz;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BankAccount {
     private String ownerName;
@@ -10,6 +11,8 @@ public class BankAccount {
     private static int nextAccountNumber = 0;
 
     private int accountNumber;
+
+    private List<String> transactionHistory = new ArrayList<>();
 
     public BankAccount(String ovnerName){
         this.ownerName = ovnerName;
@@ -45,6 +48,7 @@ public class BankAccount {
     public void deposit(double amount){
         if(noZeroValidation(amount)){
             balance += amount;
+            transactionHistory.add("Deposit + " + amount);
         }
 
     }
@@ -52,12 +56,29 @@ public class BankAccount {
     public boolean withdraw (double amount){
         if(getBalance() - amount >= 0 && noZeroValidation(amount)){
             balance -= amount;
+            transactionHistory.add("Withdraw - " + amount);
             return true;
         }else {
             return false;
         }
     }
 
+    public boolean transfer(BankAccount recipiement, double amount){
+        if(noZeroValidation(amount) && getBalance()-amount >= 0){
+            this.balance -= amount;
+            recipiement.deposit(amount);
+            transactionHistory.add("Transfer - " + amount + " to accaunt " + recipiement.getAccountNumber());
+            return true;
+        }else return false;
+    }
+
+    public void History(){
+        for(String entry : transactionHistory){
+            System.out.println(entry);
+        }
+    }
+
+    @Override
     public String toString() {
         return "Account number: " + accountNumber + "Owner: " + ownerName + ", Balance: " + balance;
     }
