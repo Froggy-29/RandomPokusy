@@ -1,13 +1,18 @@
 package cz;
 
+import java.util.Date;
+
 public class BankAccount {
     private String ownerName;
 
     private double balance;
 
+    private static int accountNumber = 0;
+
     public BankAccount(String ovnerName){
         this.ownerName = ovnerName;
         this.balance = 0;
+        this.accountNumber++;
     }
 
     public void setBalance(double balance) {
@@ -28,13 +33,15 @@ public class BankAccount {
         return ownerName;
     }
 
+    public int getAccountNumber(){ return accountNumber;};
+
     public boolean noZeroValidation(double amount){
         return amount > 0;
     }
 
     public void deposit(double amount){
         if(noZeroValidation(amount)){
-           balance += amount;
+            balance += amount;
         }
 
     }
@@ -49,6 +56,6 @@ public class BankAccount {
     }
 
     public String toString() {
-        return "Owner: " + ownerName + ", Balance: " + balance;
+        return "Account number: " + accountNumber + "Owner: " + ownerName + ", Balance: " + balance;
     }
 }
