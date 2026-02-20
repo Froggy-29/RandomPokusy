@@ -1,13 +1,13 @@
 package cz;
 
 public class BankAccount {
-    public String ovnerName;
+    private String ownerName;
 
-    public double balance;
+    private double balance;
 
-    public BankAccount(String ovnerName, double balance){
-        this.ovnerName = ovnerName;
-        this.balance = balance;
+    public BankAccount(String ovnerName){
+        this.ownerName = ovnerName;
+        this.balance = 0;
     }
 
     public void setBalance(double balance) {
@@ -19,36 +19,31 @@ public class BankAccount {
     }
 
     public void setOvnerName(String ovnerName) {
-        this.ovnerName = ovnerName;
+        this.ownerName = ovnerName;
     }
 
     public String getOvnerName() {
-        return ovnerName;
+        return ownerName;
     }
 
     public boolean noZeroValidation(double amount){
-        if(amount > 0) {
-            return false;
-        }else{
-            return true;
-        }
+        return amount > 0;
     }
 
     public void deposit(double amount){
         if(noZeroValidation(amount)){
-           setBalance(getBalance() + amount);
+           balance += amount;
         }
 
     }
 
     public void withdraw (double amount){
         if(getBalance() - amount < 0 && noZeroValidation(amount)){
-            setBalance(getBalance() - amount);
+            balance -= amount;
         }
     }
 
-    public String toString(){
-        System.out.println("Owner: " + getOvnerName() + " Balance: " + getBalance());
-        return null;
+    public String toString() {
+        return "Owner: " + ownerName + ", Balance: " + balance;
     }
 }
